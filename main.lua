@@ -68,8 +68,7 @@ local buttonCorner = Instance.new("UICorner")
 buttonCorner.CornerRadius = UDim.new(0, 6)
 buttonCorner.Parent = setButton
 
--- Apply WalkSpeed
-setButton.MouseButton1Click:Connect(function()
+local function applySpeed()
 	local speed = tonumber(speedBox.Text)
 
 	if speed then
@@ -81,6 +80,16 @@ setButton.MouseButton1Click:Connect(function()
 				humanoid.WalkSpeed = speed
 			end
 		end
+	end
+end
+
+-- Clicking the button applies the speed
+setButton.MouseButton1Click:Connect(applySpeed)
+
+-- Pressing Enter while typing applies the speed
+speedBox.FocusLost:Connect(function(enterPressed)
+	if enterPressed then
+		applySpeed()
 	end
 end)
 
